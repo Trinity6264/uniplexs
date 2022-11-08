@@ -1,0 +1,1 @@
+enum MovieStat { premier, showing }
