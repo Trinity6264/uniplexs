@@ -4,11 +4,11 @@ import 'package:uniplexs/service/navigation.dart';
 
 class VerifyViewModel extends ChangeNotifier {
   final _navService = locator.get<NavigationService>();
-  String get otpCode => _otpCode;
-  String _otpCode = '';
+  // String get otpCode => _otpCode;
+  String otpCode = '';
 
   void setOtp(String val) {
-    _otpCode += val;
+    // _otpCode += val;
   }
 
   void back() {

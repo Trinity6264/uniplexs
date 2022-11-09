@@ -17,15 +17,11 @@ class AppRoutes {
 
   static const movieWrapper = '/movie-wrapper';
 
-  static const all = <String>{
-    splashView,
-    onBoardView,
-    loginView,
-    signUpView,
-    verifyAccountView,
-    forgotPasswordView,
-    newPassWordView,
-    dashboardView,
-    movieWrapper,
-  };
+  static const movieDetail = '/movie-detail';
+
+  static const allComments = '/all-comments';
+
+  static const buyTicketsView = '/buy-tickets-view';
+
+  static const refreshmentView = '/refreshment-view';
 }
