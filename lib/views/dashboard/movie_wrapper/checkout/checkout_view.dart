@@ -1,7 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:uniplexs/app/app.gr.dart';
+import 'package:uniplexs/provider/dashboard/movie_wrapper_view_model/checkout/checkout_view_model.dart';
 import 'package:uniplexs/views/dashboard/movie_wrapper/checkout/widget/checkout_card.dart';
+import 'package:uniplexs/views/dashboard/movie_wrapper/payment/payment_view.dart';
 
 import '../../../../constant/color_pallet.dart';
 
@@ -10,6 +14,7 @@ class CheckoutView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final checkoutViewModel = context.read<CheckViewModel>();
     final tabsRouter = AutoTabsRouter.of(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -76,46 +81,61 @@ class CheckoutView extends StatelessWidget {
                 ),
               ),
               SizedBox(height: size.height * 0.02),
-              RadioListTile(
-                value: true,
-                groupValue: 'payment',
-                onChanged: (val) {},
-                title: Text(
-                  'Momo Payment',
-                  style: GoogleFonts.poppins(
-                    color: whiteColor,
-                  ),
-                ),
+              Consumer<CheckViewModel>(
+                builder: (context, value, child) {
+                  return RadioListTile(
+                    value: PaymentMethod.momo,
+                    groupValue: checkoutViewModel.paymentSelected,
+                    onChanged: checkoutViewModel.onChangedPayment,
+                    selected: value.paymentSelected == PaymentMethod.momo,
+                    title: Text(
+                      'Momo Payment',
+                      style: GoogleFonts.poppins(
+                        color: whiteColor,
+                      ),
+                    ),
+                  );
+                },
               ),
-              RadioListTile(
-                value: true,
-                selected: true,
-                groupValue: 'payment',
-                activeColor: paleGreenColor,
-                onChanged: (val) {},
-                title: Text(
-                  'Visa Payment',
-                  style: GoogleFonts.poppins(
-                    color: whiteColor,
-                  ),
-                ),
+              Consumer<CheckViewModel>(
+                builder: (context, value, child) {
+                  return RadioListTile(
+                    value: PaymentMethod.visa,
+                    groupValue: checkoutViewModel.paymentSelected,
+                    selected: value.paymentSelected == PaymentMethod.visa,
+                    onChanged: checkoutViewModel.onChangedPayment,
+                    title: Text(
+                      'Visa Payment',
+                      style: GoogleFonts.poppins(
+                        color: whiteColor,
+                      ),
+                    ),
+                  );
+                },
               ),
-              RadioListTile(
-                value: false,
-                groupValue: 'payment',
-                onChanged: (val) {},
-                title: Text(
-                  'Pay via Bank transfer',
-                  style: GoogleFonts.poppins(
-                    color: whiteColor,
-                  ),
-                ),
+              Consumer<CheckViewModel>(
+                builder: (context, value, child) {
+                  return RadioListTile(
+                    value: PaymentMethod.bank,
+                    selected: value.paymentSelected == PaymentMethod.bank,
+                    groupValue: checkoutViewModel.paymentSelected,
+                    onChanged: checkoutViewModel.onChangedPayment,
+                    title: Text(
+                      'Pay via Bank transfer',
+                      style: GoogleFonts.poppins(
+                        color: whiteColor,
+                      ),
+                    ),
+                  );
+                },
               ),
               SizedBox(height: size.height * 0.03),
               GestureDetector(
                 onTap: () {
-                  // tabsRouter.current.router
-                  //     .navigate(const CheckoutViewRoute());
+                  if (checkoutViewModel.paymentSelected == null) return;
+                  tabsRouter.current.router.navigate(PaymentViewRoute(
+                    paymentMethod: checkoutViewModel.paymentSelected!,
+                  ));
                 },
                 child: Container(
                   width: double.infinity,

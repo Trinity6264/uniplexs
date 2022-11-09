@@ -8,6 +8,7 @@ import 'package:uniplexs/constant/color_pallet.dart';
 import 'package:uniplexs/provider/authentication/login_view_model.dart';
 import 'package:uniplexs/provider/authentication/signup_view_model.dart';
 import 'package:uniplexs/provider/authentication/verify_view_model.dart';
+import 'package:uniplexs/provider/dashboard/movie_wrapper_view_model/checkout/checkout_view_model.dart';
 import 'package:uniplexs/provider/dashboard/movie_wrapper_view_model/movie/movie_view_model.dart';
 import 'package:uniplexs/provider/dashboard/movie_wrapper_view_model/movie_detail/buy_tickets/buy_tickets_view_model.dart';
 import 'package:uniplexs/provider/dashboard/movie_wrapper_view_model/movie_detail/movie_detail_view_model.dart';
@@ -40,9 +41,11 @@ class MyApp extends StatelessWidget {
             value: BuyTicketsViewModel()),
         ChangeNotifierProvider<RefreshmentViewModel>.value(
             value: RefreshmentViewModel()),
+        ChangeNotifierProvider<CheckViewModel>.value(value: CheckViewModel()),
       ],
       child: MaterialApp.router(
         title: 'Uniplexs',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.amber,
           listTileTheme: ListTileThemeData(

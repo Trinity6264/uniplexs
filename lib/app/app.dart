@@ -12,6 +12,7 @@ import 'package:uniplexs/views/dashboard/movie_wrapper/movie_detail/movie_commen
 import 'package:uniplexs/views/dashboard/movie_wrapper/movie_detail/movie_detail.dart';
 import 'package:uniplexs/views/dashboard/movie_wrapper/movie_detail/refreshment/refreshment_view.dart';
 import 'package:uniplexs/views/dashboard/movie_wrapper/movie_wrapper.dart';
+import 'package:uniplexs/views/dashboard/movie_wrapper/payment/payment_view.dart';
 import 'package:uniplexs/views/dashboard/profile/profile_view.dart';
 import 'package:uniplexs/views/dashboard/tickets/tickets_view.dart';
 import 'package:uniplexs/views/onboarding/onboard_view.dart';
@@ -43,6 +44,7 @@ import '../views/dashboard/movie_wrapper/movie/movie_view.dart';
           AutoRoute(path: 'buy-tickets-view', page: BuyTicketsView),
           AutoRoute(path: 'refreshment-view', page: RefreshmentView),
           AutoRoute(path: 'checkout-view', page: CheckoutView),
+          AutoRoute(path: 'payment-view', page: PaymentView),
         ],
       ),
       AutoRoute(path: 'ticket', page: TicketView),
