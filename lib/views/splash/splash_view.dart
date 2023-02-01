@@ -1,7 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:uniplexs/app/app.gr.dart';
 import 'package:uniplexs/app/app_router.dart';
 import 'package:uniplexs/app/locator.dart';
 import 'package:uniplexs/service/navigation.dart';
@@ -19,7 +17,8 @@ class _SplashViewState extends State<SplashView> {
   void toOnboardOrAuthScreen() {
     Future.delayed(
       const Duration(seconds: 3),
-      () => locator.get<NavigationService>().replaceNamed(AppRoutes.onBoardView),
+      () =>
+          locator.get<NavigationService>().replaceNamed(AppRoutes.onBoardView),
     );
   }
 
