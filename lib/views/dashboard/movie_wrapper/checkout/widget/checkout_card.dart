@@ -59,7 +59,7 @@ class CheckoutCard extends StatelessWidget {
                       'Drama / action',
                       style: GoogleFonts.poppins(
                         color: whiteColor,
-                        fontSize: 16.0,
+                        fontSize: 17.0,
                       ),
                     ),
                   ],

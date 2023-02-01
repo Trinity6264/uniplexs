@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:uniplexs/app/app.gr.dart';
 import 'package:uniplexs/provider/dashboard/movie_wrapper_view_model/checkout/checkout_view_model.dart';
 import 'package:uniplexs/views/dashboard/movie_wrapper/checkout/widget/checkout_card.dart';
-import 'package:uniplexs/views/dashboard/movie_wrapper/payment/payment_view.dart';
 
 import '../../../../constant/color_pallet.dart';
 
