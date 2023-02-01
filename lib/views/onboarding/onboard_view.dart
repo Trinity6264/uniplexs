@@ -1,9 +1,6 @@
-import 'dart:developer';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:uniplexs/app/app.gr.dart';
 import 'package:uniplexs/app/app_router.dart';
 import 'package:uniplexs/app/locator.dart';
 import 'package:uniplexs/service/navigation.dart';
@@ -12,7 +9,7 @@ import 'package:uniplexs/views/onboarding/widget/onboard_widget.dart';
 import '../../constant/color_pallet.dart';
 
 class OnBoardView extends StatefulWidget {
-  OnBoardView({super.key});
+  const OnBoardView({super.key});
 
   @override
   State<OnBoardView> createState() => _OnBoardViewState();

@@ -1,15 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uniplexs/app/app.gr.dart';
-import 'package:uniplexs/app/locator.dart';
 
 import 'package:uniplexs/constant/color_pallet.dart';
 import 'package:uniplexs/provider/dashboard/movie_wrapper_view_model/checkout/checkout_view_model.dart';
-import 'package:uniplexs/service/navigation.dart';
 import 'package:uniplexs/views/dashboard/movie_wrapper/payment/widget/bank_widget.dart';
 import 'package:uniplexs/views/dashboard/movie_wrapper/payment/widget/momo_widget.dart';
 import 'package:uniplexs/views/dashboard/movie_wrapper/payment/widget/visa_widget.dart';
@@ -24,7 +21,6 @@ class PaymentView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tabsRouter = AutoTabsRouter.of(context);
-    final _navService = locator.get<NavigationService>();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: backgroundColor,

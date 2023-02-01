@@ -26,7 +26,7 @@ class TicketView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
           child: Column(
-            children: [],
+            children: const [],
           ),
         ),
       ),
