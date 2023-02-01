@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,8 +6,6 @@ import 'package:uniplexs/constant/custom_enums.dart';
 import 'package:uniplexs/provider/dashboard/movie_wrapper_view_model/movie_detail/movie_detail_view_model.dart';
 import 'package:uniplexs/views/dashboard/movie_wrapper/movie_detail/widget/premier/premier_movie.dart';
 import 'package:uniplexs/views/dashboard/movie_wrapper/movie_detail/widget/showing/showing_movie.dart';
-
-import '../../../../constant/asset_path.dart';
 
 class MovieDetail extends StatelessWidget {
   MovieDetail({

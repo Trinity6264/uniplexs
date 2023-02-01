@@ -3,7 +3,6 @@ import 'package:uniplexs/app/app.gr.dart';
 import 'package:uniplexs/app/locator.dart';
 import 'package:uniplexs/constant/custom_enums.dart';
 import 'package:uniplexs/service/navigation.dart';
-import 'package:uniplexs/views/dashboard/movie_wrapper/movie_detail/movie_detail.dart';
 
 class MovieViewModel extends ChangeNotifier {
   final _navService = locator<NavigationService>();
