@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:uniplexs/app/app.gr.dart';
 import 'package:uniplexs/app/locator.dart';
@@ -19,7 +18,7 @@ void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   registerSetup();
   runApp(
-    MyApp(),
+    const MyApp(),
   );
 }
 

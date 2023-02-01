@@ -1,13 +1,8 @@
-import 'dart:async';
-
-
 import 'package:flutter/widgets.dart';
 import 'package:uniplexs/model/genres_model.dart';
 
 class HomeViewModel extends ChangeNotifier {
-
   int pageIndex = 0;
-  
 
   // Catch the index of the current page
   void onPageChanged(int value) {

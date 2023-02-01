@@ -1,9 +1,4 @@
 import 'package:auto_route/annotations.dart';
-import 'package:uniplexs/views/authentication/forgot_password/forgot_password_view.dart';
-import 'package:uniplexs/views/authentication/login/login_view.dart';
-import 'package:uniplexs/views/authentication/new_password/new_password_view.dart';
-import 'package:uniplexs/views/authentication/signup/signup_view.dart';
-import 'package:uniplexs/views/authentication/verify_account/verify_account_view.dart';
 import 'package:uniplexs/views/dashboard/dashboard_view.dart';
 import 'package:uniplexs/views/dashboard/home/home_view.dart';
 import 'package:uniplexs/views/dashboard/movie_wrapper/checkout/checkout_view.dart';
@@ -15,8 +10,6 @@ import 'package:uniplexs/views/dashboard/movie_wrapper/movie_wrapper.dart';
 import 'package:uniplexs/views/dashboard/movie_wrapper/payment/payment_view.dart';
 import 'package:uniplexs/views/dashboard/profile/profile_view.dart';
 import 'package:uniplexs/views/dashboard/tickets/tickets_view.dart';
-import 'package:uniplexs/views/onboarding/onboard_view.dart';
-import 'package:uniplexs/views/splash/splash_view.dart';
 
 import '../views/dashboard/movie_wrapper/movie/movie_view.dart';
 
