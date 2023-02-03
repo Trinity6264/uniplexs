@@ -3,7 +3,9 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:numeral/numeral.dart';
 
 import 'package:uniplexs/constant/color_pallet.dart';
 import 'package:uniplexs/model/movie/trending_day_model.dart';
@@ -15,9 +17,11 @@ class TrendingCardWidget extends StatelessWidget {
     required this.trendingDayMovieModel,
   }) : super(key: key);
 
+  static final imageBaseUrl = dotenv.env['IMAGE_BASE_URL'] as String;
+
   @override
   Widget build(BuildContext context) {
-    log(trendingDayMovieModel.backdropPath.toString());
+    Size size = MediaQuery.of(context).size;
     return Stack(
       children: [
         Container(
@@ -28,32 +32,33 @@ class TrendingCardWidget extends StatelessWidget {
             color: primaryColor,
             borderRadius: BorderRadius.circular(10),
           ),
-          // child: CachedNetworkImage(imageUrl: trendingDayMovieModel.),
+          child: CachedNetworkImage(
+            imageUrl: '$imageBaseUrl${trendingDayMovieModel.posterPath}',
+            fit: BoxFit.fill,
+          ),
         ),
         Positioned(
           bottom: 10,
           left: 30,
           child: Container(
-            width: 80,
-            height: 30,
             padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              color: backgroundColor.withOpacity(0.2),
+              color: backgroundColor.withOpacity(0.5),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  '4.5',
+                  Numeral(trendingDayMovieModel.voteCount!).format(),
                   style: GoogleFonts.poppins(
                     color: whiteColor,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 Icon(
-                  Icons.star_border,
+                  Icons.thumb_up_alt_outlined,
                   color: primaryColor,
                 ),
               ],

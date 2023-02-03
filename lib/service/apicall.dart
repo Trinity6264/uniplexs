@@ -14,4 +14,10 @@ class ApiCallService {
     final res = await dioService.get('trending/all/week');
     return res;
   }
+
+  // Now Showing
+  Future<Response> getNowShowingMovies() async {
+    final res = await dioService.get('movie/now_playing');
+    return res;
+  }
 }
