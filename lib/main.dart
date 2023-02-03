@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:uniplexs/app/app.gr.dart';
 import 'package:uniplexs/app/locator.dart';
@@ -12,10 +15,12 @@ import 'package:uniplexs/provider/dashboard/movie_wrapper_view_model/movie/movie
 import 'package:uniplexs/provider/dashboard/movie_wrapper_view_model/movie_detail/buy_tickets/buy_tickets_view_model.dart';
 import 'package:uniplexs/provider/dashboard/movie_wrapper_view_model/movie_detail/movie_detail_view_model.dart';
 import 'package:uniplexs/provider/dashboard/movie_wrapper_view_model/movie_detail/refreshment/refreshment_view_model.dart';
+import 'package:uniplexs/service/apicall.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await dotenv.load();
   registerSetup();
   runApp(
     const MyApp(),
@@ -28,6 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final router = locator.get<AppRouter>();
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<LoginViewModel>.value(value: LoginViewModel()),
