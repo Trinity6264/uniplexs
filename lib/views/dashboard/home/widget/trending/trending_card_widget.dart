@@ -1,12 +1,23 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:uniplexs/constant/color_pallet.dart';
+import 'package:uniplexs/model/movie/trending_day_model.dart';
 
 class TrendingCardWidget extends StatelessWidget {
-  const TrendingCardWidget({super.key});
+  final TrendingDayMovieModel trendingDayMovieModel;
+  const TrendingCardWidget({
+    Key? key,
+    required this.trendingDayMovieModel,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    log(trendingDayMovieModel.backdropPath.toString());
     return Stack(
       children: [
         Container(
@@ -17,6 +28,7 @@ class TrendingCardWidget extends StatelessWidget {
             color: primaryColor,
             borderRadius: BorderRadius.circular(10),
           ),
+          // child: CachedNetworkImage(imageUrl: trendingDayMovieModel.),
         ),
         Positioned(
           bottom: 10,

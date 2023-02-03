@@ -2,8 +2,12 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:uniplexs/constant/asset_path.dart';
 
 import 'package:uniplexs/constant/color_pallet.dart';
+import 'package:uniplexs/model/movie/trending_day_model.dart';
+import 'package:uniplexs/provider/dashboard/home/home_view_model.dart';
 import 'package:uniplexs/views/dashboard/home/widget/header_text_widget.dart';
 import 'package:uniplexs/views/dashboard/home/widget/trending/trending_card_widget.dart';
 
@@ -32,6 +36,7 @@ class TrendingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // autoChangedSlider(viewModel);
+
     Size size = MediaQuery.of(context).size;
     return SizedBox(
       width: double.infinity,
@@ -45,17 +50,42 @@ class TrendingWidget extends StatelessWidget {
           ),
           SizedBox(
             width: double.infinity,
-            height: 180,
-            child: PageView.builder(
-              key: const PageStorageKey('sliders'),
-              controller: _pageController,
-              onPageChanged: (val){},
-              pageSnapping: true,
-              itemCount: 4,
-              itemBuilder: (context, index) {
-                return const TrendingCardWidget();
-              },
-            ),
+            height: size.height * .23,
+            child: FutureBuilder<List<TrendingDayMovieModel>?>(
+                future: context.read<HomeViewModel>().getMoviesForDay(),
+                builder: (context,
+                    AsyncSnapshot<List<TrendingDayMovieModel>?> snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                      return Center(
+                        child: CircularProgressIndicator(color: primaryColor),
+                      );
+                    case ConnectionState.waiting:
+                      return Center(
+                        child: CircularProgressIndicator(color: primaryColor),
+                      );
+
+                    case ConnectionState.active:
+                      return Center(
+                        child: CircularProgressIndicator(color: primaryColor),
+                      );
+
+                    case ConnectionState.done:
+                      return PageView.builder(
+                        key: const PageStorageKey('sliders'),
+                        controller: _pageController,
+                        onPageChanged: (val) {},
+                        pageSnapping: true,
+                        itemCount: 4,
+                        itemBuilder: (context, index) {
+                          final trendingDayMovie = snapshot.data![index];
+                          return TrendingCardWidget(
+                            trendingDayMovieModel: trendingDayMovie,
+                          );
+                        },
+                      );
+                  }
+                }),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -65,14 +95,10 @@ class TrendingWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                dotContainer(0 == 0, size,
-                    fColor: whiteColor),
-                dotContainer(1== 1, size,
-                    fColor: whiteColor),
-                dotContainer(2 == 2, size,
-                    fColor: whiteColor),
-                dotContainer(3 == 3, size,
-                    fColor: whiteColor),
+                dotContainer(0 == 0, size, fColor: whiteColor),
+                dotContainer(1 == 1, size, fColor: whiteColor),
+                dotContainer(2 == 2, size, fColor: whiteColor),
+                dotContainer(3 == 3, size, fColor: whiteColor),
               ],
             ),
           ),
