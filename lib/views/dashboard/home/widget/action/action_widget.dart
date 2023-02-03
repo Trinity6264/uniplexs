@@ -41,7 +41,22 @@ class ActionWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: snapshot.data!
                             .map(
-                              (e) => MovieCardWidget(imgUrl: e.posterPath!),
+                              (e) => MovieCardWidget(
+                                imgUrl: e.posterPath!,
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    // isScrollControlled: true,
+                                    isDismissible: false,
+                                    enableDrag: false,
+                                    builder: (context) {
+                                      return Container(
+                                        color: backgroundColor,
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
                             )
                             .toList(),
                       ),

@@ -43,7 +43,10 @@ class NowShowingWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: snapshot.data!
                               .map(
-                                (e) => MovieCardWidget(imgUrl: e.posterPath!),
+                                (e) => MovieCardWidget(
+                                  imgUrl: e.posterPath!,
+                                  onTap: () {},
+                                ),
                               )
                               .toList()),
                     );
