@@ -1,4 +1,4 @@
-class NowShowingMovieModel {
+class UpcomingModel {
   bool? adult;
   String? backdropPath;
   List<int>? genreIds;
@@ -14,24 +14,23 @@ class NowShowingMovieModel {
   double? voteAverage;
   int? voteCount;
 
-  NowShowingMovieModel({
-    this.adult,
-    this.backdropPath,
-    this.genreIds,
-    this.id,
-    this.originalLanguage,
-    this.originalTitle,
-    this.overview,
-    this.popularity,
-    this.posterPath,
-    this.releaseDate,
-    this.title,
-    this.video,
-    this.voteAverage,
-    this.voteCount,
-  });
+  UpcomingModel(
+      {this.adult,
+      this.backdropPath,
+      this.genreIds,
+      this.id,
+      this.originalLanguage,
+      this.originalTitle,
+      this.overview,
+      this.popularity,
+      this.posterPath,
+      this.releaseDate,
+      this.title,
+      this.video,
+      this.voteAverage,
+      this.voteCount});
 
-  NowShowingMovieModel.fromJson(Map<String, dynamic> json) {
+  UpcomingModel.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'].cast<int>();
@@ -39,7 +38,7 @@ class NowShowingMovieModel {
     originalLanguage = json['original_language'];
     originalTitle = json['original_title'];
     overview = json['overview'];
-    // popularity = json['popularity'];
+    popularity = json['popularity'];
     posterPath = json['poster_path'];
     releaseDate = json['release_date'];
     title = json['title'];

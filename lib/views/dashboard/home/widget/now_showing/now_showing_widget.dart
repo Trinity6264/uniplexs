@@ -18,7 +18,7 @@ class NowShowingWidget extends StatelessWidget {
       height: size.height * 0.21,
       child: Column(
         children: [
-          HeaderTextWidget(title: 'Now Showing', onTap: () {}),
+          const HeaderTextWidget(title: 'Now Showing'),
           FutureBuilder<List<NowShowingMovieModel>?>(
               future: context.read<HomeViewModel>().getNowShowingMovies(),
               builder: (context, snapshot) {
@@ -42,7 +42,9 @@ class NowShowingWidget extends StatelessWidget {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: snapshot.data!
-                              .map((e) => const MovieCardWidget())
+                              .map(
+                                (e) => MovieCardWidget(imgUrl: e.posterPath!),
+                              )
                               .toList()),
                     );
                 }

@@ -16,17 +16,18 @@ import 'package:uniplexs/views/onboarding/widget/onboard_widget.dart';
 class TrendingWidget extends StatelessWidget {
   TrendingWidget({Key? key}) : super(key: key);
   final PageController _pageController = PageController();
-  void autoChangedSlider(int viewModel) {
+  int pageCount = 0;
+  void autoChangedSlider(int viewModel, int length) {
     _pageController.keepPage;
     _pageController.keepScrollOffset;
     Timer.periodic(const Duration(seconds: 3), (e) {
       if (_pageController.hasClients) {
-        if (viewModel < 3) {
+        if (viewModel < length) {
           _pageController.animateToPage(++viewModel,
-              duration: const Duration(milliseconds: 300), curve: Curves.ease);
+              duration: const Duration(milliseconds: 500), curve: Curves.ease);
         } else {
           _pageController.animateToPage(0,
-              duration: const Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 500),
               curve: Curves.bounceIn);
         }
       }
@@ -35,8 +36,6 @@ class TrendingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // autoChangedSlider(viewModel);
-
     Size size = MediaQuery.of(context).size;
     return SizedBox(
       width: double.infinity,
@@ -44,8 +43,7 @@ class TrendingWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          HeaderTextWidget(
-            onTap: () {},
+          const HeaderTextWidget(
             title: 'Trending',
           ),
           SizedBox(
@@ -76,8 +74,9 @@ class TrendingWidget extends StatelessWidget {
                         controller: _pageController,
                         onPageChanged: (val) {},
                         pageSnapping: true,
-                        itemCount: 4,
+                        itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
+                          autoChangedSlider(pageCount, snapshot.data!.length);
                           final trendingDayMovie = snapshot.data![index];
                           return TrendingCardWidget(
                             trendingDayMovieModel: trendingDayMovie,

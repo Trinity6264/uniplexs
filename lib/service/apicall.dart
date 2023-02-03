@@ -20,4 +20,38 @@ class ApiCallService {
     final res = await dioService.get('movie/now_playing');
     return res;
   }
+
+  //Top Rated
+  Future<Response> getTopRatedMovies() async {
+    final res = await dioService.get('movie/top_rated');
+    return res;
+  }
+
+  //Popular
+  Future<Response> getUpcomingMovies() async {
+    final res =
+        await dioService.get('movie/upcoming', queryParameters: {'page': 2});
+    return res;
+  }
+
+  //comedy
+  Future<Response> getComedyMovies() async {
+    final res =
+        await dioService.get('movie/upcoming', queryParameters: {'page': 3});
+    return res;
+  }
+
+  //drama
+  Future<Response> getDramaMovies() async {
+    final res =
+        await dioService.get('movie/now_playing', queryParameters: {'page': 2});
+    return res;
+  }
+
+  //romance
+  Future<Response> getRomanceMovies() async {
+    final res =
+        await dioService.get('movie/top_rated', queryParameters: {'page': 2});
+    return res;
+  }
 }

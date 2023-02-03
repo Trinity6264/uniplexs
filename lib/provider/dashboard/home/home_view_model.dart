@@ -4,7 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:uniplexs/app/locator.dart';
 import 'package:uniplexs/model/genres_model.dart';
 import 'package:uniplexs/model/movie/now_showing_model.dart';
+import 'package:uniplexs/model/movie/top_rated_model.dart';
 import 'package:uniplexs/model/movie/trending_day_model.dart';
+import 'package:uniplexs/model/movie/up_coming_model.dart';
 import 'package:uniplexs/service/apicall.dart';
 
 class HomeViewModel extends ChangeNotifier {
@@ -61,6 +63,87 @@ class HomeViewModel extends ChangeNotifier {
         final moviesResp = resp.data['results'] as List<dynamic>;
         final data =
             moviesResp.map((e) => NowShowingMovieModel.fromJson(e)).toList();
+        return data;
+      }
+      return null;
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
+
+  // get top rated movies
+  Future<List<TopRatedModel>?> getTopRatedMovies() async {
+    try {
+      final resp = await apiCallService.getTopRatedMovies();
+      if (resp.statusCode == 200) {
+        final moviesResp = resp.data['results'] as List<dynamic>;
+        final data = moviesResp.map((e) => TopRatedModel.fromJson(e)).toList();
+        return data;
+      }
+      return null;
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
+
+  // get upcoming movies
+  Future<List<UpcomingModel>?> getUpcomingMovies() async {
+    try {
+      final resp = await apiCallService.getUpcomingMovies();
+      if (resp.statusCode == 200) {
+        final moviesResp = resp.data['results'] as List<dynamic>;
+        final data = moviesResp.map((e) => UpcomingModel.fromJson(e)).toList();
+        return data;
+      }
+      return null;
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
+
+  // get comedy movies
+  Future<List<UpcomingModel>?> getComedyMovies() async {
+    try {
+      final resp = await apiCallService.getComedyMovies();
+      if (resp.statusCode == 200) {
+        final moviesResp = resp.data['results'] as List<dynamic>;
+        final data = moviesResp.map((e) => UpcomingModel.fromJson(e)).toList();
+        return data;
+      }
+      return null;
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
+
+  // get drama movies
+  Future<List<NowShowingMovieModel>?> getDramaMovies() async {
+    try {
+      final resp = await apiCallService.getDramaMovies();
+      if (resp.statusCode == 200) {
+        final moviesResp = resp.data['results'] as List<dynamic>;
+        final data =
+            moviesResp.map((e) => NowShowingMovieModel.fromJson(e)).toList();
+        return data;
+      }
+      return null;
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
+
+  // get Romance movies
+  Future<List<TopRatedModel>?> getRomanceMovies() async {
+    try {
+      final resp = await apiCallService.getRomanceMovies();
+      if (resp.statusCode == 200) {
+        final moviesResp = resp.data['results'] as List<dynamic>;
+        final data = moviesResp.map((e) => TopRatedModel.fromJson(e)).toList();
         return data;
       }
       return null;

@@ -4,8 +4,7 @@ import 'package:uniplexs/constant/color_pallet.dart';
 
 class HeaderTextWidget extends StatelessWidget {
   final String title;
-  final VoidCallback onTap;
-  const HeaderTextWidget({super.key, required this.title, required this.onTap});
+  const HeaderTextWidget({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +21,6 @@ class HeaderTextWidget extends StatelessWidget {
               color: whiteColor,
               fontWeight: FontWeight.w600,
               fontSize: 20.0,
-            ),
-          ),
-          TextButton(
-            onPressed: onTap,
-            child: Text(
-              'View All',
-              style: GoogleFonts.poppins(
-                color: paleGreenColor,
-              ),
             ),
           ),
         ],

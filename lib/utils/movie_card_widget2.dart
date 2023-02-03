@@ -5,10 +5,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:uniplexs/constant/color_pallet.dart';
 
-class MovieCardWidget extends StatelessWidget {
+class MovieCardWidget2 extends StatelessWidget {
   final String imgUrl;
 
-  const MovieCardWidget({
+  const MovieCardWidget2({
     Key? key,
     required this.imgUrl,
   }) : super(key: key);
@@ -20,7 +20,7 @@ class MovieCardWidget extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width * .25,
-      height: size.height * .13,
+      height: size.height * .15,
       margin: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         color: blackColor,
