@@ -10,6 +10,7 @@ import 'package:uniplexs/views/dashboard/home/widget/comedy/comedy_widget.dart';
 import 'package:uniplexs/views/dashboard/home/widget/drama/drama_widget.dart';
 import 'package:uniplexs/views/dashboard/home/widget/now_showing/now_showing_widget.dart';
 import 'package:uniplexs/views/dashboard/home/widget/romance/romance_widget.dart';
+import 'package:uniplexs/views/dashboard/home/widget/single_movie_details_widget.dart';
 import 'package:uniplexs/views/dashboard/home/widget/trailer/trailer_widget.dart';
 import 'package:uniplexs/views/dashboard/home/widget/trending/trending_widget.dart';
 
@@ -19,6 +20,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       key: const PageStorageKey('home'),
       backgroundColor: backgroundColor,
@@ -51,20 +53,20 @@ class HomeView extends StatelessWidget {
               ),
             ),
             SizedBox(height: size.height * .02),
-            TrendingWidget(),
+            // TrendingWidget(),
             SizedBox(height: size.height * .02),
             const CategoryWidget(),
-            const NowShowingWidget(),
+            // const NowShowingWidget(),
             SizedBox(height: size.height * .01),
-            const TrailerWidget(),
+            // const TrailerWidget(),
             SizedBox(height: size.height * .01),
-            const ActionWidget(),
+            // const ActionWidget(),
             SizedBox(height: size.height * .01),
-            const ComedyWidget(),
+            // const ComedyWidget(),
             SizedBox(height: size.height * .01),
-            const DramaWidget(),
+            // const DramaWidget(),
             SizedBox(height: size.height * .01),
-            const RomanceWidget(),
+            // const RomanceWidget(),
           ],
         ),
       ),

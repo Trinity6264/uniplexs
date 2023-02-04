@@ -6,6 +6,7 @@ import 'package:uniplexs/provider/dashboard/home/home_view_model.dart';
 
 import 'package:uniplexs/utils/movie_card_widget.dart';
 import 'package:uniplexs/views/dashboard/home/widget/header_text_widget.dart';
+import 'package:uniplexs/views/dashboard/home/widget/single_movie_details_widget.dart';
 
 class ActionWidget extends StatelessWidget {
   const ActionWidget({super.key});
@@ -46,13 +47,11 @@ class ActionWidget extends StatelessWidget {
                                 onTap: () {
                                   showModalBottomSheet(
                                     context: context,
-                                    // isScrollControlled: true,
+                                    isScrollControlled: true,
                                     isDismissible: false,
                                     enableDrag: false,
                                     builder: (context) {
-                                      return Container(
-                                        color: backgroundColor,
-                                      );
+                                      return MovieDetailsViewWidget();
                                     },
                                   );
                                 },
