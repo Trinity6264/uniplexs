@@ -193,6 +193,155 @@ class MovieDetailsViewWidget extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: size.height * .01),
+                        SizedBox(
+                          width: double.infinity,
+                          height: size.height * .13,
+                          child: ListView.builder(
+                            itemCount: 10,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: const EdgeInsets.only(right: 10),
+                                width: size.width * .2,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const CircleAvatar(
+                                      backgroundImage: AssetImage(
+                                        AssetPath.micky1,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Text(
+                                      'Amoah Alexander',
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.poppins(
+                                        color: whiteColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        SizedBox(height: size.height * .01),
+                        Text(
+                          'Reviews',
+                          style: GoogleFonts.poppins(
+                            color: whiteColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: size.width * .06,
+                          ),
+                        ),
+                        SizedBox(height: size.height * .01),
+                        SizedBox(
+                          width: double.infinity,
+                          height: size.height * .25,
+                          child: ListView.builder(
+                            itemCount: 10,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: const EdgeInsets.only(right: 10),
+                                width: 300,
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: blackColor,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        'hdkhsgjlgdf skfhsgkg sfkhghjgs sdgkkgdkjsd sgdkdgjskjgsd dsgjgsdhgsd gsdljsgdljgsd sgjlslgjsdg sgdlgdnsjdsg dgljsdd;gd dskhsdgs dsgljnlsgkms sdglshlrsg sgrlkjsrrsg sgljslrgjrsnb sdtlgenlrg sdglnlrrh nrsjhtoihet rlnlgrjpeouhwr rshiorekmygmf wrouhtk5e4 fkhetg5nt',
+                                        textAlign: TextAlign.start,
+                                        style: GoogleFonts.poppins(
+                                          color: whiteColor,
+                                          fontSize: size.width * .035,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        CircleAvatar(
+                                          backgroundImage:
+                                              const AssetImage(AssetPath.elvis),
+                                          radius: size.width * .04,
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          'Elvis Nkansah',
+                                          style: GoogleFonts.poppins(
+                                            color: primaryColor,
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        Text(
+                                          'July 15,2014',
+                                          style: GoogleFonts.poppins(
+                                            color: grayColor,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        SizedBox(height: size.height * .02),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Similar Movies',
+                              style: GoogleFonts.poppins(
+                                color: whiteColor,
+                                fontWeight: FontWeight.w600,
+                                fontSize: size.width * .06,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.arrow_forward_ios,
+                                color: whiteColor,
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(height: size.height * .01),
+                        SizedBox(
+                          width: double.infinity,
+                          height: size.height * .2,
+                          child: ListView.separated(
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(width: 15),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 10,
+                            itemBuilder: (context, index) {
+                              return ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.asset(
+                                  AssetPath.micky1,
+                                  width: size.width * .3,
+                                  height: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        SizedBox(height: size.height * .02),
                       ],
                     ),
                   ),
