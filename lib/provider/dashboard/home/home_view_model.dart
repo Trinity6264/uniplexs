@@ -7,6 +7,7 @@ import 'package:uniplexs/model/movie/now_showing_model.dart';
 import 'package:uniplexs/model/movie/top_rated_model.dart';
 import 'package:uniplexs/model/movie/trending_day_model.dart';
 import 'package:uniplexs/model/movie/up_coming_model.dart';
+import 'package:uniplexs/model/reviews/movie_reviews_model.dart';
 import 'package:uniplexs/service/apicall.dart';
 
 class HomeViewModel extends ChangeNotifier {
@@ -149,6 +150,24 @@ class HomeViewModel extends ChangeNotifier {
       return null;
     } catch (e) {
       log(e.toString());
+      rethrow;
+    }
+  }
+
+  // get movies review
+  Future<List<MovieReviewModel>?> getMovieReviews(int id) async {
+    try {
+      final resp = await apiCallService.getMovieReviews(id);
+      if (resp.statusCode == 200) {
+        log(resp.data.toString());
+        final moviesResp = resp.data['results'] as List<dynamic>;
+        final data =
+            moviesResp.map((e) => MovieReviewModel.fromJson(e)).toList();
+        return data;
+      }
+      return null;
+    } catch (e) {
+      log('============>' + e.toString());
       rethrow;
     }
   }

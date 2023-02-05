@@ -51,7 +51,9 @@ class ActionWidget extends StatelessWidget {
                                     isDismissible: false,
                                     enableDrag: false,
                                     builder: (context) {
-                                      return MovieDetailsViewWidget();
+                                      return MovieDetailsViewWidget(
+                                        topRatedModel: e,
+                                      );
                                     },
                                   );
                                 },

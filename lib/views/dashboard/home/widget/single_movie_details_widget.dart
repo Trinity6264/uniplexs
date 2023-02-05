@@ -1,10 +1,27 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
 import 'package:uniplexs/constant/asset_path.dart';
 import 'package:uniplexs/constant/color_pallet.dart';
+import 'package:uniplexs/model/movie/top_rated_model.dart';
+import 'package:uniplexs/model/reviews/movie_reviews_model.dart';
+import 'package:uniplexs/provider/dashboard/home/home_view_model.dart';
+import 'package:uniplexs/provider/dashboard/movie_wrapper_view_model/movie/movie_view_model.dart';
+import 'package:uniplexs/views/dashboard/home/widget/reviews/movie_review_card.dart';
 
 class MovieDetailsViewWidget extends StatelessWidget {
-  const MovieDetailsViewWidget({super.key});
+  final TopRatedModel topRatedModel;
+  const MovieDetailsViewWidget({
+    Key? key,
+    required this.topRatedModel,
+  }) : super(key: key);
+  static final baseUrl = dotenv.env['IMAGE_BASE_URL'];
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +32,8 @@ class MovieDetailsViewWidget extends StatelessWidget {
         children: [
           Column(
             children: [
-              Image.asset(
-                AssetPath.tee,
+              CachedNetworkImage(
+                imageUrl: '$baseUrl${topRatedModel.backdropPath!}',
                 width: double.infinity,
                 height: size.height * .45,
                 fit: BoxFit.cover,
@@ -48,9 +65,9 @@ class MovieDetailsViewWidget extends StatelessWidget {
                         color: whiteColor,
                       ),
                     ),
-                    SizedBox(height: size.height * .15),
+                    SizedBox(height: size.height * .1),
                     Text(
-                      'Silicon Valley',
+                      topRatedModel.title!,
                       style: GoogleFonts.poppins(
                         color: whiteColor,
                         fontWeight: FontWeight.w600,
@@ -63,7 +80,7 @@ class MovieDetailsViewWidget extends StatelessWidget {
                         SizedBox(width: size.width * .03),
                         borderText(txt: 'USA'),
                         SizedBox(width: size.width * .03),
-                        borderText(txt: 'Rating 8.5'),
+                        borderText(txt: 'Rating ${topRatedModel.voteAverage}'),
                       ],
                     ),
                   ],
@@ -158,7 +175,7 @@ class MovieDetailsViewWidget extends StatelessWidget {
                         ),
                         SizedBox(height: size.height * .01),
                         Text(
-                          'sadkhfffffffghhsd kdhskhfkhfs skfskfsfs daskhfshkfs sfljgjl sfljgjljg fsljjgdjgdl sdljfsjjgljdg akdfhkfhssf ahsffjsf adkfskfss jadfsjkjfsj adkhadhkd',
+                          topRatedModel.overview ?? 'Overview',
                           style: GoogleFonts.poppins(
                             color: whiteColor,
                           ),
@@ -238,64 +255,47 @@ class MovieDetailsViewWidget extends StatelessWidget {
                         SizedBox(
                           width: double.infinity,
                           height: size.height * .25,
-                          child: ListView.builder(
-                            itemCount: 10,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                margin: const EdgeInsets.only(right: 10),
-                                width: 300,
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: blackColor,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        'hdkhsgjlgdf skfhsgkg sfkhghjgs sdgkkgdkjsd sgdkdgjskjgsd dsgjgsdhgsd gsdljsgdljgsd sgjlslgjsdg sgdlgdnsjdsg dgljsdd;gd dskhsdgs dsgljnlsgkms sdglshlrsg sgrlkjsrrsg sgljslrgjrsnb sdtlgenlrg sdglnlrrh nrsjhtoihet rlnlgrjpeouhwr rshiorekmygmf wrouhtk5e4 fkhetg5nt',
-                                        textAlign: TextAlign.start,
-                                        style: GoogleFonts.poppins(
-                                          color: whiteColor,
-                                          fontSize: size.width * .035,
-                                        ),
+                          child: FutureBuilder<List<MovieReviewModel>?>(
+                              future: context
+                                  .read<HomeViewModel>()
+                                  .getMovieReviews(topRatedModel.id!),
+                              builder: (context, snapshot) {
+                                switch (snapshot.connectionState) {
+                                  case ConnectionState.none:
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                          color: primaryColor),
+                                    );
+                                  case ConnectionState.waiting:
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                          color: primaryColor),
+                                    );
+
+                                  case ConnectionState.active:
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        color: primaryColor,
                                       ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        CircleAvatar(
-                                          backgroundImage:
-                                              const AssetImage(AssetPath.elvis),
-                                          radius: size.width * .04,
-                                        ),
-                                        const SizedBox(width: 10),
-                                        Text(
-                                          'Elvis Nkansah',
-                                          style: GoogleFonts.poppins(
-                                            color: primaryColor,
-                                          ),
-                                        ),
-                                        const Spacer(),
-                                        Text(
-                                          'July 15,2014',
-                                          style: GoogleFonts.poppins(
-                                            color: grayColor,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
+                                    );
+                                  case ConnectionState.done:
+                                    if (snapshot.hasData) {
+                                      return ListView.builder(
+                                        itemCount: snapshot.data!.length,
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (context, index) {
+                                          final model = snapshot.hasData
+                                              ? snapshot.data![index]
+                                              : null;
+                                          return MoviewReviewCard(
+                                              model: model!);
+                                        },
+                                      );
+                                    } else {
+                                      return SizedBox();
+                                    }
+                                }
+                              }),
                         ),
                         SizedBox(height: size.height * .02),
                         Row(

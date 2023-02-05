@@ -54,4 +54,11 @@ class ApiCallService {
         await dioService.get('movie/top_rated', queryParameters: {'page': 2});
     return res;
   }
+  // ! Review
+
+  //review movies
+  Future<Response> getMovieReviews(int id) async {
+    final res = await dioService.get('movie/$id/reviews');
+    return res;
+  }
 }
