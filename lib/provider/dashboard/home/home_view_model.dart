@@ -194,7 +194,6 @@ class HomeViewModel extends ChangeNotifier {
     try {
       final resp = await apiCallService.getMovieCrew(id);
       if (resp.statusCode == 200) {
-        log('===================--------------->${resp.data}');
         final moviesResp = resp.data['cast'] as List<dynamic>;
 
         final data =
@@ -203,7 +202,6 @@ class HomeViewModel extends ChangeNotifier {
       }
       return null;
     } catch (e) {
-      log('============>$e');
       rethrow;
     }
   }
