@@ -73,4 +73,10 @@ class ApiCallService {
     final res = await dioService.get('movie/$id/credits');
     return res;
   }
+
+  //Video
+  Future<Response> getMovieVideo(int id) async {
+    final res = await dioService.get('movie/$id/videos');
+    return res;
+  }
 }

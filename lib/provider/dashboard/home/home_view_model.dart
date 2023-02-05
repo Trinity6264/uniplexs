@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:uniplexs/app/locator.dart';
 import 'package:uniplexs/model/genres_model.dart';
 import 'package:uniplexs/model/movie/cast_and_crew_model.dart';
+import 'package:uniplexs/model/movie/movie_video_model.dart';
 import 'package:uniplexs/model/movie/now_showing_model.dart';
 import 'package:uniplexs/model/movie/similar_movie_model.dart';
 import 'package:uniplexs/model/movie/top_rated_model.dart';
@@ -15,13 +16,27 @@ import 'package:uniplexs/service/apicall.dart';
 class HomeViewModel extends ChangeNotifier {
   final apiCallService = locator.get<ApiCallService>();
 
+  bool _isPlaying = false;
+  bool get isPlaying => _isPlaying;
+
   int pageIndex = 0;
-  List<TrendingDayMovieModel> listOfTrendingDayMovies = [];
+  List<MovieVideoModel>? _listOfTrailer;
+  List<MovieVideoModel>? get listOfTrailer => _listOfTrailer;
 
   // Catch the index of the current page
   void onPageChanged(int value) {
     pageIndex = value;
     notifyListeners();
+  }
+
+  //playing video
+  void onVideoPlaying(bool value) {
+    _isPlaying = value;
+    notifyListeners();
+  }
+
+  void clearingVideo() {
+    _listOfTrailer = null;
   }
 
   // !Category list
@@ -201,6 +216,21 @@ class HomeViewModel extends ChangeNotifier {
         return data;
       }
       return null;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> getMovieVideo(int id) async {
+    try {
+      final resp = await apiCallService.getMovieVideo(id);
+      if (resp.statusCode == 200) {
+        final moviesResp = resp.data['results'] as List<dynamic>;
+
+        final data =
+            moviesResp.map((e) => MovieVideoModel.fromJson(e)).toList();
+        _listOfTrailer = data;
+      }
     } catch (e) {
       rethrow;
     }

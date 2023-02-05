@@ -74,13 +74,15 @@ class MoviewReviewCard extends StatelessWidget {
                   color: primaryColor,
                 ),
               ),
-              const Spacer(),
-              Text(
-                DateFormat.yMMMMEEEEd().format(
-                  DateTime.parse(model.updatedAt!),
-                ),
-                style: GoogleFonts.poppins(
-                  color: grayColor,
+              const SizedBox(width: 20),
+              Expanded(
+                child: Text(
+                  DateFormat.yMMMMEEEEd().format(
+                    DateTime.parse(model.updatedAt!),
+                  ),
+                  style: GoogleFonts.poppins(
+                    color: grayColor,
+                  ),
                 ),
               ),
             ],
