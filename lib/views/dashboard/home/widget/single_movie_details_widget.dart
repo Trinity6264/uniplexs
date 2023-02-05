@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import 'package:uniplexs/constant/asset_path.dart';
 import 'package:uniplexs/constant/color_pallet.dart';
+import 'package:uniplexs/model/movie/cast_and_crew_model.dart';
 import 'package:uniplexs/model/movie/similar_movie_model.dart';
 import 'package:uniplexs/model/movie/top_rated_model.dart';
 import 'package:uniplexs/model/reviews/movie_reviews_model.dart';
@@ -214,34 +215,65 @@ class MovieDetailsViewWidget extends StatelessWidget {
                         SizedBox(
                           width: double.infinity,
                           height: size.height * .13,
-                          child: ListView.builder(
-                            itemCount: 10,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                margin: const EdgeInsets.only(right: 10),
-                                width: size.width * .2,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    const CircleAvatar(
-                                      backgroundImage: AssetImage(
-                                        AssetPath.micky1,
+                          child: FutureBuilder<List<CastAndCrewModel>?>(
+                              future: context
+                                  .read<HomeViewModel>()
+                                  .getMovieCrews(topRatedModel.id!),
+                              builder: (context, snapshot) {
+                                switch (snapshot.connectionState) {
+                                  case ConnectionState.none:
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                          color: primaryColor),
+                                    );
+                                  case ConnectionState.waiting:
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                          color: primaryColor),
+                                    );
+
+                                  case ConnectionState.active:
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        color: primaryColor,
                                       ),
-                                    ),
-                                    const SizedBox(height: 5),
-                                    Text(
-                                      'Amoah Alexander',
-                                      textAlign: TextAlign.center,
-                                      style: GoogleFonts.poppins(
-                                        color: whiteColor,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
+                                    );
+                                  case ConnectionState.done:
+                                    return ListView.builder(
+                                      itemCount: snapshot.data!.length,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        final crewModel = snapshot.data![index];
+                                        return Container(
+                                          margin:
+                                              const EdgeInsets.only(right: 10),
+                                          width: size.width * .2,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              CircleAvatar(
+                                                backgroundImage: NetworkImage(
+                                                  '$baseUrl${crewModel.profilePath}',
+                                                ),
+                                              ),
+                                              const SizedBox(height: 5),
+                                              Flexible(
+                                                child: Text(
+                                                  crewModel.name ?? 'Unknown',
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.poppins(
+                                                    color: whiteColor,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    );
+                                }
+                              }),
                         ),
                         SizedBox(height: size.height * .01),
                         Text(

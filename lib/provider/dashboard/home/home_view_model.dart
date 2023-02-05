@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/widgets.dart';
 import 'package:uniplexs/app/locator.dart';
 import 'package:uniplexs/model/genres_model.dart';
+import 'package:uniplexs/model/movie/cast_and_crew_model.dart';
 import 'package:uniplexs/model/movie/now_showing_model.dart';
 import 'package:uniplexs/model/movie/similar_movie_model.dart';
 import 'package:uniplexs/model/movie/top_rated_model.dart';
@@ -160,7 +161,6 @@ class HomeViewModel extends ChangeNotifier {
     try {
       final resp = await apiCallService.getMovieReviews(id);
       if (resp.statusCode == 200) {
-        log(resp.data.toString());
         final moviesResp = resp.data['results'] as List<dynamic>;
         final data =
             moviesResp.map((e) => MovieReviewModel.fromJson(e)).toList();
@@ -178,10 +178,27 @@ class HomeViewModel extends ChangeNotifier {
     try {
       final resp = await apiCallService.getSimilarMovies(id);
       if (resp.statusCode == 200) {
-        log(resp.data.toString());
         final moviesResp = resp.data['results'] as List<dynamic>;
         final data =
             moviesResp.map((e) => SimilarMovieModel.fromJson(e)).toList();
+        return data;
+      }
+      return null;
+    } catch (e) {
+      log('============>$e');
+      rethrow;
+    }
+  }
+
+  Future<List<CastAndCrewModel>?> getMovieCrews(int id) async {
+    try {
+      final resp = await apiCallService.getMovieCrew(id);
+      if (resp.statusCode == 200) {
+        log('===================--------------->${resp.data}');
+        final moviesResp = resp.data['cast'] as List<dynamic>;
+
+        final data =
+            moviesResp.map((e) => CastAndCrewModel.fromJson(e)).toList();
         return data;
       }
       return null;
