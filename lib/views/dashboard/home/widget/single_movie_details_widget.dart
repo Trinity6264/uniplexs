@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import 'package:uniplexs/constant/asset_path.dart';
 import 'package:uniplexs/constant/color_pallet.dart';
+import 'package:uniplexs/model/movie/similar_movie_model.dart';
 import 'package:uniplexs/model/movie/top_rated_model.dart';
 import 'package:uniplexs/model/reviews/movie_reviews_model.dart';
 import 'package:uniplexs/provider/dashboard/home/home_view_model.dart';
@@ -80,7 +81,7 @@ class MovieDetailsViewWidget extends StatelessWidget {
                         SizedBox(width: size.width * .03),
                         borderText(txt: 'USA'),
                         SizedBox(width: size.width * .03),
-                        borderText(txt: 'Rating ${topRatedModel.voteAverage}'),
+                        borderText(txt: 'Rating ${topRatedModel.voteCount}'),
                       ],
                     ),
                   ],
@@ -292,7 +293,7 @@ class MovieDetailsViewWidget extends StatelessWidget {
                                         },
                                       );
                                     } else {
-                                      return SizedBox();
+                                      return const SizedBox();
                                     }
                                 }
                               }),
@@ -323,23 +324,74 @@ class MovieDetailsViewWidget extends StatelessWidget {
                         SizedBox(
                           width: double.infinity,
                           height: size.height * .2,
-                          child: ListView.separated(
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(width: 15),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 10,
-                            itemBuilder: (context, index) {
-                              return ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.asset(
-                                  AssetPath.micky1,
-                                  width: size.width * .3,
-                                  height: double.infinity,
-                                  fit: BoxFit.cover,
-                                ),
-                              );
-                            },
-                          ),
+                          child: FutureBuilder<List<SimilarMovieModel>?>(
+                              future: context
+                                  .read<HomeViewModel>()
+                                  .getSimilarMovie(topRatedModel.id!),
+                              builder: (context, snapshot) {
+                                switch (snapshot.connectionState) {
+                                  case ConnectionState.none:
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                          color: primaryColor),
+                                    );
+                                  case ConnectionState.waiting:
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                          color: primaryColor),
+                                    );
+
+                                  case ConnectionState.active:
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        color: primaryColor,
+                                      ),
+                                    );
+                                  case ConnectionState.done:
+                                    return ListView.separated(
+                                      separatorBuilder: (context, index) =>
+                                          const SizedBox(width: 15),
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: snapshot.data!.length,
+                                      itemBuilder: (context, index) {
+                                        final similarModel =
+                                            snapshot.data![index];
+
+                                        return ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          child: CachedNetworkImage(
+                                            imageUrl:
+                                                '$baseUrl${similarModel.posterPath}',
+                                            width: size.width * .3,
+                                            height: double.infinity,
+                                            fit: BoxFit.cover,
+                                            errorWidget: (context, url, error) {
+                                              return Container(
+                                                width: size.width * .3,
+                                                height: double.infinity,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  color: blackColor,
+                                                ),
+                                                alignment: Alignment.center,
+                                                child: Icon(
+                                                  Icons.movie_filter_rounded,
+                                                  color: primaryColor,
+                                                ),
+                                              );
+                                            },
+                                            placeholder: (context, url) =>
+                                                CircularProgressIndicator(
+                                              color: primaryColor,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                }
+                              }),
                         ),
                         SizedBox(height: size.height * .02),
                       ],

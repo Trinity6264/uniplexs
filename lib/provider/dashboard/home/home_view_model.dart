@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:uniplexs/app/locator.dart';
 import 'package:uniplexs/model/genres_model.dart';
 import 'package:uniplexs/model/movie/now_showing_model.dart';
+import 'package:uniplexs/model/movie/similar_movie_model.dart';
 import 'package:uniplexs/model/movie/top_rated_model.dart';
 import 'package:uniplexs/model/movie/trending_day_model.dart';
 import 'package:uniplexs/model/movie/up_coming_model.dart';
@@ -167,7 +168,25 @@ class HomeViewModel extends ChangeNotifier {
       }
       return null;
     } catch (e) {
-      log('============>' + e.toString());
+      log('============>$e');
+      rethrow;
+    }
+  }
+
+  // get movies review
+  Future<List<SimilarMovieModel>?> getSimilarMovie(int id) async {
+    try {
+      final resp = await apiCallService.getSimilarMovies(id);
+      if (resp.statusCode == 200) {
+        log(resp.data.toString());
+        final moviesResp = resp.data['results'] as List<dynamic>;
+        final data =
+            moviesResp.map((e) => SimilarMovieModel.fromJson(e)).toList();
+        return data;
+      }
+      return null;
+    } catch (e) {
+      log('============>$e');
       rethrow;
     }
   }
