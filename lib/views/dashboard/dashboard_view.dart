@@ -5,7 +5,7 @@ import 'package:uniplexs/constant/color_pallet.dart';
 import 'package:uniplexs/views/dashboard/home/home_view.dart';
 import 'package:uniplexs/views/dashboard/movie_wrapper/movie_wrapper.dart';
 import 'package:uniplexs/views/dashboard/profile/profile_view.dart';
-import 'package:uniplexs/views/dashboard/tickets/tickets_view.dart';
+import 'package:uniplexs/views/dashboard/ticket_wrapper/ticket_wrapper.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({super.key});
@@ -14,7 +14,7 @@ class DashboardView extends StatelessWidget {
   static const _views = [
     HomeView(),
     MovieWrapper(),
-    TicketView(),
+    TicketWrapper(),
     ProfileView(),
   ];
 
@@ -24,7 +24,7 @@ class DashboardView extends StatelessWidget {
       routes: const [
         HomeViewRoute(),
         MovieWrapperRoute(),
-        TicketViewRoute(),
+        TicketWrapperRoute(),
         ProfileViewRoute(),
       ],
       curve: Curves.ease,
