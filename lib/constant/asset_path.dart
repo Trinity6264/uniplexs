@@ -5,4 +5,7 @@ class AssetPath {
   static const mega = 'asset/img/mega.jpg';
   static const micky1 = 'asset/img/micky.jpg';
   static const logo = 'asset/img/icon.png';
+  static const pepsi = 'asset/img/pep.png';
+  static const popCorn = 'asset/img/pop.png';
+  static const coke = 'asset/img/coke.png';
 }

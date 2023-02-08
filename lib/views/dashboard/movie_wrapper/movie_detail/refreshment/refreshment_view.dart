@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uniplexs/app/app.gr.dart';
+import 'package:uniplexs/constant/asset_path.dart';
 import 'package:uniplexs/constant/color_pallet.dart';
 import 'package:uniplexs/provider/dashboard/movie_wrapper_view_model/movie_detail/refreshment/refreshment_view_model.dart';
 import 'package:uniplexs/views/dashboard/movie_wrapper/movie_detail/refreshment/widget/refreshment_widget.dart';
@@ -47,6 +48,7 @@ class RefreshmentView extends StatelessWidget {
                 child: Column(
                   children: [
                     RefreshmentWidget(
+                      assetPath: AssetPath.coke,
                       decrement: () => refreshViewModel
                           .onCocaColaChanged(Operation.substract),
                       increment: () =>
@@ -67,6 +69,7 @@ class RefreshmentView extends StatelessWidget {
                       ),
                     ),
                     RefreshmentWidget(
+                      assetPath: AssetPath.pepsi,
                       decrement: () =>
                           refreshViewModel.onPepsiChanged(Operation.substract),
                       increment: () =>
@@ -87,6 +90,7 @@ class RefreshmentView extends StatelessWidget {
                       ),
                     ),
                     RefreshmentWidget(
+                      assetPath: AssetPath.popCorn,
                       decrement: () =>
                           refreshViewModel.onPopChanged(Operation.substract),
                       increment: () =>

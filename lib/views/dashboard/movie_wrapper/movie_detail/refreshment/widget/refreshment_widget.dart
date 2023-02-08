@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uniplexs/constant/asset_path.dart';
 
 import '../../../../../../constant/color_pallet.dart';
 
@@ -10,6 +11,7 @@ class RefreshmentWidget extends StatelessWidget {
   final Widget child;
   final String title;
   final String price;
+  final String assetPath;
   const RefreshmentWidget({
     Key? key,
     required this.increment,
@@ -17,6 +19,7 @@ class RefreshmentWidget extends StatelessWidget {
     required this.child,
     required this.title,
     required this.price,
+    required this.assetPath,
   }) : super(key: key);
 
   @override
@@ -33,7 +36,11 @@ class RefreshmentWidget extends StatelessWidget {
               Container(
                 width: size.width * 0.3,
                 height: size.height * 0.1,
-                color: primaryColor,
+                decoration: BoxDecoration(
+                  color: backgroundColor,
+                  image: DecorationImage(
+                      image: AssetImage(assetPath), fit: BoxFit.contain),
+                ),
               ),
               SizedBox(width: size.width * 0.1),
               Expanded(
